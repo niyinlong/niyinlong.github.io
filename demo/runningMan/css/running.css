@@ -1,0 +1,144 @@
+/* 人的躯干部分 */
+.people{
+	width: 86px;
+	height: 274px;
+	margin: 100px auto;
+	position: relative;
+	-webkit-animation: people-action 2s linear infinite;
+}
+
+.people div{
+	position: absolute;
+}
+
+/* 右大手臂 */
+.people .arm-right{
+	width: 51px;
+	height: 124px;
+	left: 3px;
+	top: 93px;
+	-webkit-transform-origin: 28px 33px;
+	-webkit-animation: arm-right-action 2s linear infinite;
+}
+
+/* 左大手臂 */
+.people .arm-left{
+	width: 51px;
+	height: 124px;
+	left: 3px;
+	top: 93px;
+	z-index: -1;
+	-webkit-transform-origin: 28px 33px;
+	-webkit-animation: arm-left-action 2s linear infinite;
+}
+
+/* 右小手臂 */
+.people .forearm-right{
+	width: 36px;
+	height: 121px;
+	top: 106px;
+	left: 13px;
+	-webkit-transform-origin: 15px 11px;
+	-webkit-animation: forearm-right-action 2s linear infinite;
+}
+
+/* 右小手臂 */
+.people .forearm-left{
+	width: 36px;
+	height: 121px;
+	top: 106px;
+	left: 13px;
+	-webkit-transform-origin: 15px 11px;
+	-webkit-animation: forearm-left-action 2s linear infinite;
+}
+
+
+/* 左大腿 */
+.leg-left{
+	width: 69px;
+	height: 144px;
+	-webkit-transform-origin: 33px 5px;
+	z-index: -1;
+	left: 9px;
+	top: 250px;
+	-webkit-animation: leg-left-action 2s linear infinite;
+}
+
+.shin-left{
+	width: 53px;
+	height: 173px;
+	-webkit-transform-origin: 26px 19px;
+	left:7px;
+	top:115px;
+	z-index: -1;
+	-webkit-animation: shin-left-action 2s linear infinite;
+	
+}
+
+.foot-left{
+	width: 67px;
+	height: 34px;
+	-webkit-transform-origin: 23px 21px;
+	top:150px;
+	left:2px;
+	-webkit-animation: foot-left-action 2s linear infinite;
+	
+}
+
+.toes-left{
+	width: 28px;
+	height: 25px;
+	-webkit-transform-origin: 0px 13px;
+	top:9px;
+	left:63px;
+	-webkit-animation: toes-left-action 2s linear infinite;
+}
+
+/* 右大腿 */
+.leg-right{
+	width: 69px;
+	height: 144px;
+	-webkit-transform-origin: 33px 5px;
+	z-index: -1;
+	left: 9px;
+	top: 250px;
+	-webkit-animation: leg-right-action 2s linear infinite;
+}
+
+.shin-right{
+	width: 53px;
+	height: 173px;
+	-webkit-transform-origin: 26px 19px;
+	left:7px;
+	top:115px;
+	z-index: -1;
+	-webkit-animation: shin-right-action 2s linear infinite;
+	
+}
+
+.foot-right{
+	width: 67px;
+	height: 34px;
+	-webkit-transform-origin: 23px 21px;
+	top:150px;
+	left:2px;
+	-webkit-animation: foot-right-action 2s linear infinite;
+	
+}
+
+.toes-right{
+	width: 28px;
+	height: 25px;
+	-webkit-transform-origin: 0px 13px;
+	top:9px;
+	left:63px;
+	-webkit-animation: toes-right-action 2s linear infinite;
+}
+
+
+.shadow{
+	position: absolute;
+	top: 510px;
+	left: 0px;
+	-webkit-animation: shadow 2s linear infinite;
+}
