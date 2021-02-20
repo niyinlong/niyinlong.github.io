@@ -3,9 +3,8 @@
 menu:
   主页: /
   分类: /categories
-  基础课: /basis
-  进阶课: /senior
-  实战课: /project
+  标签: /tags
+  关于我: /about
 
 # SubNav
 subnav:

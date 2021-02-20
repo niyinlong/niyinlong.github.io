@@ -6,6 +6,9 @@ cnpm install -g hexo-cli
 ##### 启动服务
 hexo server
 
+### 创建页面
+hexo new page "tages" 
+
 ##### 发布文章
 hexo new layout title
 
