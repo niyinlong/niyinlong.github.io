@@ -74,7 +74,7 @@ favicon: /favicon.png
 avatar: /images/niyinlong.jpeg
 
 #是否开启分享
-share_jia: true
+share_jia: false
 
 #评论：1、多说；2、网易云跟帖；3、畅言；4、Disqus；5、Gitment
 #不需要使用某项，直接设置值为false，或注释掉
@@ -110,7 +110,7 @@ style:
 # slider的设置
 slider:
   # 是否默认展开tags板块
-  showTags: false
+  showTags: true
 
 # 智能菜单
 # 如不需要，将该对应项置为false
@@ -124,8 +124,7 @@ smart_menu:
 
 # 友情链接
 friends:
-  非凡学院: http://www.feifanedu.com.cn/
   微博: http://weibo.com/niyinlong/
 
 # 关于我
-aboutme: 倪银龙 <br/> 上海非凡学院前端讲师 <br/> 主讲课程：html5,css3,javascript<br/>Vue.js,React.js,Anular.js<br/>php,node.js等等
+aboutme: 倪银龙 <br/> 前端讲师 <br/> 主讲课程：html5,css3,javascript<br/>Vue.js,React.js,php,node.js等等
