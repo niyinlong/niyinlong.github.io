@@ -14,6 +14,12 @@
         <% if (theme.excerpt_link) { %>
           <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
         <% } %>
+      <% } else if(page.type === "tags"){ %>
+        <% if (site.tags.length){ %>
+          <%- list_tags() %>
+        <% } %>
+      <% } else if (page.type === "categories") { %>
+        <%- list_categories(site.categories) %>
       <% } else { %>
         <%- post.content %>
       <% } %>

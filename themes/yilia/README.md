@@ -88,18 +88,18 @@ menu:
 
 # SubNav
 subnav:
-  github: "https://github.com/niyinlong"
-  weibo: "https://github.com/niyinlong"
-  #rss: "#"
-  #zhihu: "#"
+  github: "#"
+  weibo: "#"
+  rss: "#"
+  zhihu: "#"
   #qq: "#"
-  weixin: "niyinlong123"
+  #weixin: "#"
   #jianshu: "#"
   #douban: "#"
   #segmentfault: "#"
   #bilibili: "#"
   #acfun: "#"
-  mail: "mailto:niyinlong@126.com"
+  #mail: "mailto:litten225@qq.com"
   #facebook: "#"
   #google: "#"
   #twitter: "#"
@@ -202,10 +202,14 @@ smart_menu:
   aboutme: '关于我'
 
 friends:
-  云端软件: http://yunduansoft.cn
-  非凡学院: http://www.feifanedu.com.cn
+  友情链接1: http://localhost:4000/
+  友情链接2: http://localhost:4000/
+  友情链接3: http://localhost:4000/
+  友情链接4: http://localhost:4000/
+  友情链接5: http://localhost:4000/
+  友情链接6: http://localhost:4000/
 
-aboutme: 倪银龙<br/>专注于网页前端教程研发<br/>非凡学院前端讲师
+aboutme: 很惭愧<br><br>只做了一点微小的工作<br>谢谢大家
 ```
 
 
