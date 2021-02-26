@@ -2,9 +2,8 @@
 
 menu:
   主页: /
-  标签: /tags
   归档: /archives
-  我: /about
+  关于我: /about
 
 # SubNav
 subnav:
@@ -119,7 +118,7 @@ slider:
 smart_menu:
   innerArchive: '所有文章'
   friends: '友链'
-  aboutme: '关于我'
+  # aboutme: '关于我'
 
 # 友情链接
 friends:
