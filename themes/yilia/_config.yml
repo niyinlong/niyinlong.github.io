@@ -123,6 +123,9 @@ smart_menu:
 # 友情链接
 friends:
   微博: http://weibo.com/niyinlong/
+  Vue官网: https://cn.vuejs.org/
+  Element UI: https://element.eleme.cn/#/zh-CN
+  Ant Desing Vue: https://www.antdv.com/docs/vue/introduce-cn/
 
 # 关于我
 aboutme: 倪银龙 <br/> 前端讲师 <br/> 主讲课程：html5,css3,javascript<br/>Vue.js,React.js,php,node.js等等
