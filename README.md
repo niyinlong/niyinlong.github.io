@@ -1,5 +1,4 @@
 # 命令行
-
 ##### 安装hexo
 cnpm install -g hexo-cli
 
@@ -10,7 +9,7 @@ hexo server
 hexo new page "tages" 
 
 ##### 发布文章
-hexo new layout title
+hexo new post title
 
 ##### 生成静态文件
 hexo g
