@@ -8,8 +8,9 @@ import random
 import logging
 
 base_url = "https://github.com/haizlin/fe-interview/issues?page="
-start_page = 220  # 起始页码
-end_page = 224   # 结束页码224
+#[210, 221] [220, 224]
+start_page = 210  # 起始页码
+end_page = 221   # 结束页码224
 
 # 配置日志记录
 logging.basicConfig(filename='log.txt', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', encoding='utf-8')
