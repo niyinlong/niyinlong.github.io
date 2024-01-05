@@ -136,6 +136,15 @@
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
+/* 侧边栏 标题 */
+.VPSidebar .VPSidebarItem p, .VPSidebar .VPSidebarItem a {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 头像 */
 .content-container h1 + p {
   line-height: 50px;
 }
