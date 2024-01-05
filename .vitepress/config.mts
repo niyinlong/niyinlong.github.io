@@ -4,6 +4,7 @@ import { generateSidebar } from 'vitepress-sidebar'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   srcDir: './src/docs',
+  base: '/',
   title: "niyinlong",
   description: "a fe interview docs",
   themeConfig: {
@@ -19,10 +20,17 @@ export default defineConfig({
     },
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: 'html', link: '/html/html' },
+      { text: 'css', link: '/css/css' },
+      { text: 'js', link: '/js/js' }
     ],
     // 动态生成侧边栏
-    sidebar: generateSidebar({ documentRootPath: './src/docs' }),
+    sidebar: generateSidebar({
+      documentRootPath: './src/docs',
+      collapsed: true,
+      sortMenusByFrontmatterOrder: true,
+      rootGroupCollapsed: true
+    }),
     socialLinks: [
       { icon: 'github', link: 'https://github.com/niyinlong/niyinlong.github.io' }
     ],
