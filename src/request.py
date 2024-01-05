@@ -3,10 +3,12 @@ from bs4 import BeautifulSoup
 import re
 import os
 import html2text
+import time
+import random
 
 base_url = "https://github.com/haizlin/fe-interview/issues?page="
 start_page = 1  # 起始页码
-end_page = 1   # 结束页码224
+end_page = 10   # 结束页码224
 list = []
 
 # 定义issue类
@@ -39,7 +41,7 @@ def html2Markdown(html):
 # 找出最优解
 def getBeastAnswer(text):
   soup = BeautifulSoup(text, 'html.parser')
-  items = soup.find_all('div', class_='TimelineItem js-comment-container')
+  items = soup.find_all('div', class_='js-comment-container')
   list = []
   for item in items:
     star = 0
@@ -51,15 +53,21 @@ def getBeastAnswer(text):
       star += int(span.get_text(strip=True))
     comment = Comment(author.get_text(strip=True), f"https://github"+author["href"], avatar["src"], html2Markdown(markdown), star)
     list.append(comment)
-  if list:
-    return max(list, key=lambda x: x.star)
+  if len(list) > 0:
+    beast = max(list, key=lambda x: x.star)
+    # 如果 只有一个答案，且没有人点赞，则不认为答案有效
+    if len(list) == 1 and beast.star == 0:
+      return False
+    else:
+      return beast
   else:
     return False
 
 # 获取问题的详情并存到文件夹
 def getIssueDetail(list):
   for issue in list:
-    response = requests.get(f"https://github.com{issue.url}")
+    url = f"https://github.com{issue.url}"
+    response = requests.get(url)
     if response.status_code == 200:
       answer = getBeastAnswer(response.text)
       if answer:
@@ -75,7 +83,12 @@ def getIssueDetail(list):
         # 文本存储
         with open(fileName, "w", encoding="utf-8") as file:
           file.write(markdown)
-      # print(markdown)
+        print(f"{fileName}文件写入成功！")
+      else:
+        print(f"{issue.title}没有找到答案")
+    else:
+      print(f"详情页抓取失败：{url}, status code: {response.status_code}")
+    time.sleep(random.uniform(1, 3)) # 一个随机的延时，避免访问频繁被限制
 
 def getIssueDetailUrls(html):
   list.clear() # 清空列表
@@ -89,7 +102,8 @@ def getIssueDetailUrls(html):
       if (match):
         issue = Issue(match.group(1).strip(), url, match.group(3))
         list.append(issue)
-  getIssueDetail(list)
+  if list:
+    getIssueDetail(list)
 
 # 定义一个函数，用于 issues 列表
 def fetchIssueList(base_url, start, end):
@@ -100,12 +114,12 @@ def fetchIssueList(base_url, start, end):
       html = BeautifulSoup(response.text, 'html.parser')
       getIssueDetailUrls(html)
     else:
-      print(f"Failed to fetch content from {url}, status code: {response.status_code}")
+      print(f"抓取失败：{url}, status code: {response.status_code}")
 
 # 调用爬虫接口
 fetchIssueList(base_url, start_page, end_page)
-      
+
 # 测试代码
-# issue = Issue('css', '/haizlin/fe-interview/issues/17', '用css创建一个三角形，并简述原理')
+# issue = Issue('css', '/haizlin/fe-interview/issues/5687', '你觉得前端开发人员有必要学习Rust吗？')
 # list.append(issue)
 # getIssueDetail(list)
