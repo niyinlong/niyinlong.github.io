@@ -8,9 +8,8 @@ import random
 import logging
 
 base_url = "https://github.com/haizlin/fe-interview/issues?page="
-start_page = 1  # 起始页码
-end_page = 10   # 结束页码224
-list = []
+start_page = 220  # 起始页码
+end_page = 224   # 结束页码224
 
 # 配置日志记录
 logging.basicConfig(filename='log.txt', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', encoding='utf-8')
@@ -20,7 +19,7 @@ class Issue:
   def __init__(self, category, url, title):
     self.category = category
     self.url = url
-    self.title = title.replace("?.", "？.") # ?. 不能作为文件名
+    self.title = sanitize_filename(title) # ?. <> 不能作为文件名
 class Comment:
   def __init__(self, author, host, avatar, content, star):
     self.author = author if author else '无名'
@@ -29,6 +28,12 @@ class Comment:
     self.content = content if content else '无'
     self.star = star if star else 0
 
+# 生成安全的文件名
+def sanitize_filename(filename):
+  invalid_chars = r'\/:*?"<>|'
+  for char in invalid_chars:
+    filename = filename.replace(char, '_')
+  return filename
 # html 转 markdown
 def html2Markdown(html):
   html = str(html)
@@ -36,7 +41,7 @@ def html2Markdown(html):
   h.body_width = 0  # 禁止自动换行
   h.mark_code = True
   h.emphasis_mark = ''
-  h.ignore_links = True
+  h.ignore_links = False
   h.ignore_images = False
   markdown = h.handle(html)
   markdown = markdown.replace("[code]", "```").replace("[/code]", "```")
@@ -57,10 +62,10 @@ def getBeastAnswer(text):
       star += int(span.get_text(strip=True))
     comment = Comment(author.get_text(strip=True), f"https://github"+author["href"], avatar["src"], html2Markdown(markdown), star)
     list.append(comment)
-  if len(list) > 0:
+  # 至少2个答案，且至少5个赞
+  if len(list) >= 2:
     beast = max(list, key=lambda x: x.star)
-    # 如果 只有一个答案，且点赞数少于5，则不认为答案有效
-    if len(list) == 1 and beast.star < 5:
+    if beast.star < 5:
       return False
     else:
       return beast
@@ -77,8 +82,13 @@ def getIssueDetail(list):
       answer = getBeastAnswer(response.text)
       if answer:
         markdown = ""
-        markdown = f"# {issue.title}\n\n作者：[{answer.author}]({answer.authorHost})\n\n"
-        markdown += f"\n\n{answer.content}"
+        # 标题
+        markdown = f"# {issue.title}\n\n"
+        # 作者
+        if answer.author and answer.avatar:
+          markdown += f"作者：![{answer.author}]({answer.avatar})[{answer.author}]({answer.authorHost})\n\n"
+        # 内容
+        markdown += f"{answer.content}"
         
         fileName = f"./src/docs/{issue.category}/{issue.title}.md"
         filePath = f"./src/docs/{issue.category}"
@@ -97,7 +107,7 @@ def getIssueDetail(list):
     time.sleep(random.uniform(1, 3)) # 一个随机的延时，避免访问频繁被限制
 
 def getIssueDetailUrls(html):
-  list.clear() # 清空列表
+  list = [] # 清空列表
   tags = html.find_all('a', {'class': 'Link--primary'})
   # 遍历每个链接标签，提取链接和文本内容
   for link_tag in tags:
