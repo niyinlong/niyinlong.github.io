@@ -15,7 +15,7 @@ export default defineConfig({
     lastUpdated: { text: '最后更新于' },
     editLink: {
       text: '在 GitHub 上编辑此页面',
-      pattern: 'https://github.com/niyinlong/niyinlong.github.io/edit/main/docs/:path'
+      pattern: 'https://github.com/niyinlong/niyinlong.github.io/edit/master/src/docs/:path'
     },
     nav: [
       { text: 'Home', link: '/' },
