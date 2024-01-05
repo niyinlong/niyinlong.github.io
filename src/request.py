@@ -5,18 +5,22 @@ import os
 import html2text
 import time
 import random
+import logging
 
 base_url = "https://github.com/haizlin/fe-interview/issues?page="
 start_page = 1  # 起始页码
 end_page = 10   # 结束页码224
 list = []
 
+# 配置日志记录
+logging.basicConfig(filename='log.txt', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', encoding='utf-8')
+
 # 定义issue类
 class Issue:
   def __init__(self, category, url, title):
     self.category = category
     self.url = url
-    self.title = title
+    self.title = title.replace("?.", "？.") # ?. 不能作为文件名
 class Comment:
   def __init__(self, author, host, avatar, content, star):
     self.author = author if author else '无名'
@@ -55,8 +59,8 @@ def getBeastAnswer(text):
     list.append(comment)
   if len(list) > 0:
     beast = max(list, key=lambda x: x.star)
-    # 如果 只有一个答案，且没有人点赞，则不认为答案有效
-    if len(list) == 1 and beast.star == 0:
+    # 如果 只有一个答案，且点赞数少于5，则不认为答案有效
+    if len(list) == 1 and beast.star < 5:
       return False
     else:
       return beast
@@ -68,6 +72,7 @@ def getIssueDetail(list):
   for issue in list:
     url = f"https://github.com{issue.url}"
     response = requests.get(url)
+    logging.info(f"开始抓取详情页：{url}")
     if response.status_code == 200:
       answer = getBeastAnswer(response.text)
       if answer:
@@ -83,6 +88,7 @@ def getIssueDetail(list):
         # 文本存储
         with open(fileName, "w", encoding="utf-8") as file:
           file.write(markdown)
+        logging.info(f"{fileName}文件写入成功！")
         print(f"{fileName}文件写入成功！")
       else:
         print(f"{issue.title}没有找到答案")
@@ -108,7 +114,9 @@ def getIssueDetailUrls(html):
 # 定义一个函数，用于 issues 列表
 def fetchIssueList(base_url, start, end):
   for i in range(start, end + 1):
-    url = f"{base_url}/{i}"  # 拼接具体的网页地址
+    url = f"{base_url}{i}"  # 拼接具体的网页地址
+    print(f"开始抓取列表第{i}页：{url}")
+    logging.info(f"开始抓取列表第{i}页：{url}")
     response = requests.get(url)
     if response.status_code == 200:
       html = BeautifulSoup(response.text, 'html.parser')
@@ -118,8 +126,3 @@ def fetchIssueList(base_url, start, end):
 
 # 调用爬虫接口
 fetchIssueList(base_url, start_page, end_page)
-
-# 测试代码
-# issue = Issue('css', '/haizlin/fe-interview/issues/5687', '你觉得前端开发人员有必要学习Rust吗？')
-# list.append(issue)
-# getIssueDetail(list)
