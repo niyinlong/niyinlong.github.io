@@ -2,7 +2,9 @@
 import { h } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+import Antd from 'ant-design-vue'
 import './style.css'
+import 'ant-design-vue/dist/reset.css'
 
 export default {
   extends: DefaultTheme,
@@ -12,6 +14,6 @@ export default {
     })
   },
   enhanceApp({ app, router, siteData }) {
-    // ...
+    app.use(Antd);
   }
 } satisfies Theme
